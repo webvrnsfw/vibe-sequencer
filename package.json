@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "parcel serve index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build --public-url './' index.html"
   },
   "browserslist": [
     "last 3 Chrome versions",

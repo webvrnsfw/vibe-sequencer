@@ -147,13 +147,13 @@ function App() {
       <h1>vibe sequencer</h1>
 
       <label className="device">
-        Device:{" "}
+        device:{" "}
         <select
-          value={localStorage.deviceIndex || ""}
+          value={connecting ? "" : localStorage.deviceIndex || ""}
           onChange={(e) => setDeviceIndex(e.target.value, devices)}
         >
           <option disabled value="">
-            {connecting ? "connecting..." : "select a device"}
+            {connecting ? "connecting to intiface..." : "select a device"}
           </option>
           {devices.map((device, i) => (
             <option key={i} value={device.Index}>
@@ -205,7 +205,7 @@ function App() {
           setSequences(newSequences);
         }}
       >
-        Add Sequencer
+        add sequencer
       </button>
     </sp-theme>
   );
