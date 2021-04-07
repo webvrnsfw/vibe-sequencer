@@ -1,0 +1,80 @@
+:root {
+  --bg: #222;
+}
+
+body, select, button {
+  background: var(--bg);
+  color: white;
+}
+select, button {
+  border: 2px solid grey;
+}
+button:disabled {
+  color: darkgrey;
+}
+button {
+  padding: 8px 16px;
+}
+
+body {
+  padding: 0 16px;
+}
+* {
+  font-size: 16pt;
+}
+h1 {
+  font-size: 20pt;
+}
+
+.device {
+  display: block; 
+}
+.device select {
+  width: 16em;
+}
+
+.sequencer {
+  margin: 32px 0;
+  width: 852px;
+}
+.sequencer input, .sequencer button {
+  width: 115px;
+  margin: 4px 16px; 
+}
+.spacer {
+  flex: 1;
+}
+.controls {
+  display: flex;
+}
+.grid {
+  display: flex;
+  user-select: none;
+  margin: 8px;
+}
+
+.column {
+  border: 2px solid var(--bg);
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0 2px;
+}
+.column.playing {
+  border: 2px solid #aaf;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  margin: 2px 0;
+  border: 2px solid grey;
+}
+.cell:hover {
+  background: #ccc;
+}
+.cell.selected {
+  background: #ddf;
+}
+.cell.selected:hover {
+  background: #ccf;
+}
