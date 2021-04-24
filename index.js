@@ -120,7 +120,12 @@ function App() {
     if (isNaN(index)) return;
     localStorage.deviceIndex = index;
     const device = devices.find((device) => device.Index === index);
-    if (device) setDevice(device);
+    if (device) {
+      setDevice(device);
+    } else if (devices.length) {
+      setDevice(devices[0]);
+      localStorage.deviceIndex = 0;
+    }
   });
 
   useEffect(async () => {
