@@ -65,7 +65,13 @@ function Sequencer({
     const id = setInterval(() => {
       setPlaying((playing) => {
         playing = (playing + 1) % 20;
-        device.vibrate(sequence.values[playing] / 4);
+        const allowedMessages = device.AllowedMessages;
+        const messageTypes = Buttplug.ButtplugDeviceMessageType;
+        if (allowedMessages.includes(messageTypes.LinearCmd)) {
+          device.linear(sequence.values[playing] / 4, Math.floor(sequence.duration * 0.9));
+        } else if (allowedMessages.includes(messageTypes.VibrateCmd)) {
+          device.vibrate(sequence.values[playing] / 4);
+        }
         return playing;
       });
     }, sequence.duration);
@@ -92,9 +98,9 @@ function Sequencer({
         <sp-slider
           label="duration"
           value={sequence.duration}
-          min={500}
+          min={250}
           max={3000}
-          step={500}
+          step={250}
           onInput={(e) => setDuration(parseInt(e.target.value, 10))}
         ></sp-slider>
         <div className="spacer"></div>
@@ -106,7 +112,7 @@ function Sequencer({
 
 const initialSequences = localStorage.sequences
   ? JSON.parse(localStorage.sequences)
-  : [{values: range(20).map(() => 0), duration: 500}];
+  : [{values: range(20).map(() => 0), duration: 250}];
 
 function App() {
   const [connecting, setConnecting] = useState(true);
@@ -205,7 +211,7 @@ function App() {
       <button
         onClick={() => {
           const newSequences = sequences.slice(0);
-          newSequences.push({values: range(20).map(() => 0), duration: 500});
+          newSequences.push({values: range(20).map(() => 0), duration: 250});
           localStorage.sequences = JSON.stringify(newSequences);
           setSequences(newSequences);
         }}
